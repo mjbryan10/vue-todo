@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Todos />
+    <Todos v-bind:todos="todos" />
   </div>
 </template>
 
@@ -11,6 +11,27 @@ export default {
   name: 'App',
   components: {
     Todos
+  },
+  data() {
+    return {
+      todos: [
+        {
+          id: 1,
+          title: "Todo One",
+          completed: false
+        },
+        {
+          id: 1,
+          title: "Todo Two",
+          completed: true
+        },
+        {
+          id: 3,
+          title: "Todo Three",
+          completed: false
+        }
+      ]
+    }
   }
 }
 </script>
