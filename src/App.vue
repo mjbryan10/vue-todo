@@ -2,41 +2,34 @@
   <div id="app">
     <Header />
     <AddTodo v-on:add-todo="addTodo" />
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" v-on:check-todo="markComplete" />
+    <Spinner v-if="isLoading" />
+    <Todos v-else v-bind:todos="todos" v-on:del-todo="deleteTodo" v-on:check-todo="markComplete" />
   </div>
 </template>
 
 <script>
+//TODO ADD IF STATEMENT FOR SPINNER/TODOS
 import Todos from './components/Todos.vue'
 import Header from './components/layout/Header.vue';
 import AddTodo from './components/AddTodo';
+import Spinner from './components/Spinner'
+import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
     Header,
     Todos,
-    AddTodo
+    AddTodo,
+    Spinner
   },
   data() {
     return {
       todos: [
-        {
-          id: 1,
-          title: "Todo One",
-          completed: false
-        },
-        {
-          id: 2,
-          title: "Todo Two",
-          completed: true
-        },
-        {
-          id: 3,
-          title: "Todo Three",
-          completed: false
-        }
-      ]
+       
+      ],
+      isLoading: false,
+      error: "",
     }
   },
   methods: {
@@ -51,6 +44,19 @@ export default {
       this.todos = [...this.todos, newTodo];
     }
   },
+  created() {
+    this.error = "";
+    this.isLoading = true;
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then(res => {
+        this.todos = res.data;
+        this.isLoading = false;
+        })
+      .catch(err => {
+        console.log(err)
+        this.error = "Oops something went wrong, please try again later.";
+        })
+  }
 }
 </script>
 
