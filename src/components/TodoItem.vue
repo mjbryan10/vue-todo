@@ -1,10 +1,10 @@
 <template>
 	<div class="todo-item" :class="{'is-complete':todo.completed}">
-		<p>
-			<input type="checkbox" @change="$emit('check-todo', todo.id)" :checked="todo.completed" />
-			{{todo.title}}
+		<div>
+			<input :id="todo.id" type="checkbox" @change="$emit('check-todo', todo.id)" :checked="todo.completed" />
+			<label :for="todo.id">{{todo.title}}</label>
 			<button @click="$emit('del-todo', todo.id)" class="del">X</button>
-		</p>
+		</div>
 	</div>
 </template>
 
@@ -32,5 +32,8 @@ export default {
 	border-radius: 50%;
 	cursor: pointer;
 	float: right;
+}
+label {
+	margin: 0 1em;
 }
 </style>

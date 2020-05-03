@@ -8,7 +8,6 @@
 </template>
 
 <script>
-//TODO ADD IF STATEMENT FOR SPINNER/TODOS
 import Todos from './components/Todos.vue'
 import Header from './components/layout/Header.vue';
 import AddTodo from './components/AddTodo';
@@ -80,5 +79,9 @@ body {
 }
 .btn:hover {
   background: #666;
+}
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 </style>
